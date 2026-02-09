@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BbsController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,5 +19,10 @@ use App\Http\Controllers\BbsController;
 //     return view('welcome');
 // });
 Route::get('/', [BbsController::class, 'index'])->name('index');
-Route::get('/{bb}', [BbsController::class, 'detail'])->name('detail');
 
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/create', [HomeController::class, 'create'])->name('bb.create');
+Route::post('/home', [HomeController::class, 'store'])->name('bb.store');
+Route::get('/{bb}', [BbsController::class, 'detail'])->name('detail');
